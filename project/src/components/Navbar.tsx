@@ -31,8 +31,8 @@ function Navbar({ className }: { className?: string }) {
 
           <span className="px-2 text-white">|</span>
 
-          <Link href="/contact-us">
-            <MenuItem setActive={setActive} active={active} item="Contact Us" />
+          <Link href="/contact">
+            <MenuItem setActive={setActive} active={active} item="Contact" />
           </Link>
         </>
       </Menu>
