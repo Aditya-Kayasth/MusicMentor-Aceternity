@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/lib/utils";
 import React, {
   useEffect,
   useRef,
@@ -8,19 +7,9 @@ import React, {
   ReactNode,
 } from "react";
 import { createNoise3D } from "simplex-noise";
+import { cn } from "@/lib/utils";
 
-export const WavyBackground = ({
-  children,
-  className,
-  containerClassName,
-  colors,
-  waveWidth,
-  backgroundFill,
-  blur = 10,
-  speed = "fast",
-  waveOpacity = 0.5,
-  ...props
-}: {
+type WavyBackgroundProps = {
   children?: ReactNode;
   className?: string;
   containerClassName?: string;
@@ -30,13 +19,30 @@ export const WavyBackground = ({
   blur?: number;
   speed?: "slow" | "fast";
   waveOpacity?: number;
-  [key: string]: unknown;
-}) => {
-  const noise = createNoise3D();
+  paused?: boolean;
+};
+
+export const WavyBackground = ({
+  children,
+  className,
+  containerClassName,
+  colors,
+  waveWidth = 50,
+  backgroundFill = "black",
+  blur = 10,
+  speed = "fast",
+  waveOpacity = 0.5,
+  paused = false,
+}: WavyBackgroundProps) => {
+  const noise = useRef(createNoise3D());
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-  const [animationId, setAnimationId] = useState<number | null>(null);
+  const animationIdRef = useRef<number | null>(null);
   const ntRef = useRef(0);
+  const initializedRef = useRef(false);
+
+  const [isSafari, setIsSafari] = useState(false);
+
   const waveColors = colors ?? [
     "#38bdf8",
     "#818cf8",
@@ -45,16 +51,7 @@ export const WavyBackground = ({
     "#22d3ee",
   ];
 
-  const getSpeed = () => {
-    switch (speed) {
-      case "slow":
-        return 0.001;
-      case "fast":
-        return 0.002;
-      default:
-        return 0.001;
-    }
-  };
+  const getSpeed = () => (speed === "fast" ? 0.002 : 0.001);
 
   const drawWave = useCallback(
     (n: number, w: number, h: number) => {
@@ -64,10 +61,10 @@ export const WavyBackground = ({
       ntRef.current += getSpeed();
       for (let i = 0; i < n; i++) {
         ctx.beginPath();
-        ctx.lineWidth = waveWidth || 50;
+        ctx.lineWidth = waveWidth;
         ctx.strokeStyle = waveColors[i % waveColors.length];
         for (let x = 0; x < w; x += 5) {
-          const y = noise(x / 800, 0.3 * i, ntRef.current) * 100;
+          const y = noise.current(x / 800, 0.3 * i, ntRef.current) * 100;
           ctx.lineTo(x, y + h * 0.5);
         }
         ctx.stroke();
@@ -78,6 +75,8 @@ export const WavyBackground = ({
   );
 
   const render = useCallback(() => {
+    if (paused) return;
+
     const ctx = ctxRef.current;
     const canvas = canvasRef.current;
     if (!ctx || !canvas) return;
@@ -85,75 +84,94 @@ export const WavyBackground = ({
     const w = canvas.width;
     const h = canvas.height;
 
-    ctx.fillStyle = backgroundFill || "black";
-    ctx.globalAlpha = waveOpacity || 0.5;
+    ctx.fillStyle = backgroundFill;
+    ctx.globalAlpha = waveOpacity;
     ctx.fillRect(0, 0, w, h);
+
     drawWave(5, w, h);
 
-    const id = requestAnimationFrame(render);
-    setAnimationId(id);
-  }, [backgroundFill, waveOpacity, drawWave]);
+    animationIdRef.current = requestAnimationFrame(render);
+  }, [drawWave, paused, backgroundFill, waveOpacity]);
 
-  const init = useCallback(() => {
+  const setCanvasSize = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    ctxRef.current = ctx;
+    // ✅ Optimize for mobile
+    const dpr = typeof window !== "undefined" && window.devicePixelRatio > 1 ? 1.5 : 1;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    const setSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      ctx.filter = `blur(${blur}px)`;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    ctx.scale(dpr, dpr);
+    ctx.filter = `blur(${blur}px)`;
+
+    ctxRef.current = ctx;
+  }, [blur]);
+
+  const init = useCallback(() => {
+    if (typeof window === "undefined") return;
+
+    if (!initializedRef.current) {
+      setCanvasSize();
+      initializedRef.current = true;
+    }
+
+    const resizeHandler = () => {
+      cancelAnimationFrame(animationIdRef.current!);
+      setCanvasSize();
+      if (!paused) {
+        render();
+      }
     };
 
-    setSize();
-    window.addEventListener("resize", setSize);
-
+    window.addEventListener("resize", resizeHandler);
     render();
 
     return () => {
-      window.removeEventListener("resize", setSize);
+      window.removeEventListener("resize", resizeHandler);
     };
-  }, [blur, render]);
+  }, [render, paused, setCanvasSize]);
+
+  useEffect(() => {
+    const isSafariBrowser =
+      typeof navigator !== "undefined" &&
+      navigator.userAgent.includes("Safari") &&
+      !navigator.userAgent.includes("Chrome");
+
+    setIsSafari(isSafariBrowser);
+  }, []);
 
   useEffect(() => {
     const cleanupResize = init();
     return () => {
-      if (animationId) cancelAnimationFrame(animationId);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
       if (cleanupResize) cleanupResize();
     };
-  }, [animationId, init]);
-
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    setIsSafari(
-      typeof window !== "undefined" &&
-        navigator.userAgent.includes("Safari") &&
-        !navigator.userAgent.includes("Chrome")
-    );
-  }, []);
+  }, [init]);
 
   return (
     <div
       className={cn(
-        "h-screen flex flex-col items-center justify-center",
+        "h-screen flex flex-col items-center justify-center overflow-hidden",
         containerClassName
       )}
     >
       <canvas
-        className="absolute inset-0 z-0"
         ref={canvasRef}
-        id="canvas"
-        style={{
-          ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
-        }}
-      ></canvas>
-      <div className={cn("relative z-10", className)} {...props}>
-        {children}
-      </div>
+        className="absolute inset-0 z-0"
+        style={isSafari ? { filter: `blur(${blur}px)` } : {}}
+      />
+      <div className={cn("relative z-10", className)}>{children}</div>
     </div>
   );
 };
