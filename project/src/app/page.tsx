@@ -4,7 +4,7 @@ import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { InfiniteCards } from "@/components/InfiniteCards";
 import HowerCards from "@/components/HowerCards";
 import Instructors from "@/components/Instructors";
-import Footer from "@/components/Footer"; // 👈 Add this import
+
 
 export default function Home() {
   return (

@@ -4,7 +4,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import data from "@/data/music_data.json";
 import { Course } from "@/components/FeaturedSection";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 function Courses() {
   return (
@@ -41,7 +41,7 @@ function Courses() {
               </CardItem>
 
               <CardItem translateZ="100" className="w-full mb-6">
-                <img
+                <Image
                   src={item.image || "https://via.placeholder.com/1000"}
                   height="1000"
                   width="1000"
