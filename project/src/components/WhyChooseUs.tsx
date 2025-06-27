@@ -47,7 +47,7 @@ const content = [
 
 export function WhyChooseUs() {
   return (
-    <div className="w-full py-16 bg-black">
+    <div className="w-full py-16">
       <h2 className="text-center text-6xl font-bold text-white mb-10">
         Why Choose Us
       </h2>
