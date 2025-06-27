@@ -5,6 +5,7 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import data from "@/data/music_data.json";
 import { Course } from "@/components/FeaturedSection";
 import Image from "next/image";
+import Link from "next/link";
 
 function Courses() {
   return (
@@ -51,15 +52,18 @@ function Courses() {
               </CardItem>
 
               <div className="flex justify-between items-center mt-6">
-                <CardItem
-                  translateZ={20}
-                  as="a"
-                  href="https://twitter.com/mannupaaji"
+                <Link
+                  href="#"
                   target="_blank"
                   className="text-white text-sm hover:underline"
                 >
-                  Try now →
-                </CardItem>
+                  <CardItem
+                    translateZ={20}
+                    as="span"
+                  >
+                    Try now →
+                  </CardItem>
+                </Link>
                 <CardItem
                   translateZ={20}
                   as="button"

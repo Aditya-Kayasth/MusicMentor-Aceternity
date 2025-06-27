@@ -22,7 +22,7 @@ const HeroSection: React.FC = () => {
       <div className="relative z-10 max-w-2xl text-center mt-2 mb-10 px-4">
         <p className="text-base sm:text-lg md:text-xl text-gray-300">
           Dive into our comprehensive music courses and transform your musical
-          journey today. Whether you're a beginner or looking to refine your
+          journey today. Whether you&apos;re a beginner or looking to refine your
           skills, join us to unlock your true potential.
         </p>
       </div>

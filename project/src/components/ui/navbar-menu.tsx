@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Transition } from "framer-motion";
-
+import Image from "next/image";
 
 const transition: Transition = {
   type: "spring",
@@ -90,7 +90,7 @@ export const ProductItem = ({
 }) => {
   return (
     <a href={href} className="flex space-x-2">
-      <img
+      <Image
         src={src}
         width={140}
         height={70}
@@ -109,11 +109,14 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+export const HoveredLink = ({
+  children,
+  ...rest
+}: React.PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>) => {
   return (
     <a
       {...rest}
-      className="text-neutral-700 dark:text-neutral-200 hover:text-black "
+      className="text-neutral-700 dark:text-neutral-200 hover:text-black"
     >
       {children}
     </a>
