@@ -4,7 +4,7 @@ import data from "../data/music_data.json";
 import { BackgroundGradient } from "./ui/background-gradient";
 import Link from "next/link";
 
-interface Course {
+export interface Course {
   id: number;
   title: string;
   slug: string;
@@ -24,16 +24,16 @@ function FeaturedSection() {
     <div className="bg-zinc-950 min-h-screen py-24 px-6">
       {/* Title Section */}
       <div className="text-center max-w-2xl mx-auto mb-20">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight">
-          Featured Courses
-        </h1>
+      <h2 className="text-center text-6xl font-bold text-white mb-10">
+        Featured Courses
+      </h2>
         <p className="text-lg sm:text-xl text-gray-400">
           Learn from world-class instructors and take your musical skills to new heights.
         </p>
       </div>
 
       {/* Course Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto gap-y-10">
         {featuredCourses.map((course: Course) => (
           <Link
             key={course.id}

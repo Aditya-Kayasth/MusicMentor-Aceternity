@@ -1,8 +1,8 @@
 import { GridBackground } from "./ui/GridBackground";
-import { Spotlight } from "./ui/Spotlight";
+
 import React from "react";
 import { Button } from "./ui/moving-border";
-
+import { Spotlight } from "./ui/spotlight"
 const HeroSection: React.FC = () => {
   return (
     <section className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 overflow-hidden">

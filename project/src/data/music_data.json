@@ -8,7 +8,7 @@
       "price": 99.99,
       "instructor": "John Doe",
       "isFeatured": true,
-      "image": "https://images.unsplash.com/photo-1511376777868-611b54f68947"
+      "image": "https://images.pexels.com/photos/164936/pexels-photo-164936.jpeg"
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "price": 89.99,
       "instructor": "Jane Smith",
       "isFeatured": false,
-      "image": "https://images.unsplash.com/photo-1524231757912-21f2a174d0d3"
+      "image": "https://images.pexels.com/photos/164712/pexels-photo-164712.jpeg"
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "price": 79.99,
       "instructor": "Carlos Rivera",
       "isFeatured": false,
-      "image": "https://images.unsplash.com/photo-1583337130417-3346a1b98a9f"
+      "image": "https://images.pexels.com/photos/164934/pexels-photo-164934.jpeg"
     },
     {
       "id": 4,
@@ -38,67 +38,67 @@
       "price": 109.99,
       "instructor": "Anna Lee",
       "isFeatured": true,
-      "image": "https://images.unsplash.com/photo-1604014237800-f7f6d3be2f44"
+      "image": "https://images.pexels.com/photos/164727/pexels-photo-164727.jpeg"
     },
-     {
-    "id": 5,
-    "title": "Advanced Guitar Techniques",
-    "slug": "advanced-guitar-techniques",
-    "description": "Take your guitar skills to the next level with advanced chords, solos, and fingerstyle techniques.",
-    "price": 119.99,
-    "instructor": "Mike Johnson",
-    "isFeatured": false,
-    "image": "https://images.unsplash.com/photo-1611605698324-d6d3c112c5c2"
-  },
-  {
-    "id": 6,
-    "title": "Jazz Piano Improvisation",
-    "slug": "jazz-piano-improvisation",
-    "description": "Learn the art of jazz piano with improvisation, theory, and real-world practice.",
-    "price": 129.99,
-    "instructor": "Sophia Green",
-    "isFeatured": true,
-    "image": "https://images.unsplash.com/photo-1611171711914-1f3b5f59b7dc"
-  },
-  {
-    "id": 7,
-    "title": "Electronic Music Production",
-    "slug": "electronic-music-production",
-    "description": "Produce electronic tracks using industry-standard DAWs and synths.",
-    "price": 139.99,
-    "instructor": "David Kim",
-    "isFeatured": true,
-    "image": "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2"
-  },
-  {
-    "id": 8,
-    "title": "Ukulele Basics",
-    "slug": "ukulele-basics",
-    "description": "Learn to play the ukulele with easy strumming patterns and catchy tunes.",
-    "price": 59.99,
-    "instructor": "Emma Watson",
-    "isFeatured": false,
-    "image": "https://images.unsplash.com/photo-1598387992575-63c9eb9595f0"
-  },
-  {
-    "id": 9,
-    "title": "Singing for Beginners",
-    "slug": "singing-for-beginners",
-    "description": "Develop your vocal technique and sing with confidence in this beginner-friendly course.",
-    "price": 89.99,
-    "instructor": "Chris Jordan",
-    "isFeatured": true,
-    "image": "https://images.unsplash.com/photo-1598387840700-ecf261fc8d2f"
-  },
-  {
-    "id": 10,
-    "title": "Music Theory Masterclass",
-    "slug": "music-theory-masterclass",
-    "description": "Understand the building blocks of music with a deep dive into harmony, rhythm, and melody.",
-    "price": 149.99,
-    "instructor": "Laura Bennett",
-    "isFeatured": false,
-    "image": "https://images.unsplash.com/photo-1508182311003-f46f26f8f8e2"
-  }
+    {
+      "id": 5,
+      "title": "Advanced Guitar Techniques",
+      "slug": "advanced-guitar-techniques",
+      "description": "Take your guitar skills to the next level with advanced chords, solos, and fingerstyle techniques.",
+      "price": 119.99,
+      "instructor": "Mike Johnson",
+      "isFeatured": false,
+      "image": "https://images.pexels.com/photos/374861/pexels-photo-374861.jpeg"
+    },
+    {
+      "id": 6,
+      "title": "Jazz Piano Improvisation",
+      "slug": "jazz-piano-improvisation",
+      "description": "Learn the art of jazz piano with improvisation, theory, and real-world practice.",
+      "price": 129.99,
+      "instructor": "Sophia Green",
+      "isFeatured": true,
+      "image": "https://images.pexels.com/photos/164907/pexels-photo-164907.jpeg"
+    },
+    {
+      "id": 7,
+      "title": "Electronic Music Production",
+      "slug": "electronic-music-production",
+      "description": "Produce electronic tracks using industry-standard DAWs and synths.",
+      "price": 139.99,
+      "instructor": "David Kim",
+      "isFeatured": true,
+      "image": "https://images.pexels.com/photos/164708/pexels-photo-164708.jpeg"
+    },
+    {
+      "id": 8,
+      "title": "Ukulele Basics",
+      "slug": "ukulele-basics",
+      "description": "Learn to play the ukulele with easy strumming patterns and catchy tunes.",
+      "price": 59.99,
+      "instructor": "Emma Watson",
+      "isFeatured": false,
+      "image": "https://images.pexels.com/photos/374918/pexels-photo-374918.jpeg"
+    },
+    {
+      "id": 9,
+      "title": "Singing for Beginners",
+      "slug": "singing-for-beginners",
+      "description": "Develop your vocal technique and sing with confidence in this beginner-friendly course.",
+      "price": 89.99,
+      "instructor": "Chris Jordan",
+      "isFeatured": true,
+      "image": "https://images.pexels.com/photos/164911/pexels-photo-164911.jpeg"
+    },
+    {
+      "id": 10,
+      "title": "Music Theory Masterclass",
+      "slug": "music-theory-masterclass",
+      "description": "Understand the building blocks of music with a deep dive into harmony, rhythm, and melody.",
+      "price": 149.99,
+      "instructor": "Laura Bennett",
+      "isFeatured": false,
+      "image": "https://images.pexels.com/photos/164709/pexels-photo-164709.jpeg"
+    }
   ]
 }
