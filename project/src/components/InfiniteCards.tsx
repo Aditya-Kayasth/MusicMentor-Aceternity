@@ -54,7 +54,7 @@ export function InfiniteCards() {
       </div>
 
       {/* Testimonials Carousel */}
-      <div className="relative z-10 w-full max-w-6xl text-left">
+      <div className="relative z-10 w-full max-w-7xl text-left">
         <InfiniteMovingCards
           items={testimonials}
           direction="right"
