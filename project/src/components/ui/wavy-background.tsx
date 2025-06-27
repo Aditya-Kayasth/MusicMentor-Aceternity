@@ -1,6 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -15,7 +21,7 @@ export const WavyBackground = ({
   waveOpacity = 0.5,
   ...props
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   containerClassName?: string;
   colors?: string[];
@@ -50,23 +56,26 @@ export const WavyBackground = ({
     }
   };
 
-  const drawWave = (n: number, w: number, h: number) => {
-    const ctx = ctxRef.current;
-    if (!ctx) return;
+  const drawWave = useCallback(
+    (n: number, w: number, h: number) => {
+      const ctx = ctxRef.current;
+      if (!ctx) return;
 
-    ntRef.current += getSpeed();
-    for (let i = 0; i < n; i++) {
-      ctx.beginPath();
-      ctx.lineWidth = waveWidth || 50;
-      ctx.strokeStyle = waveColors[i % waveColors.length];
-      for (let x = 0; x < w; x += 5) {
-        let y = noise(x / 800, 0.3 * i, ntRef.current) * 100;
-        ctx.lineTo(x, y + h * 0.5);
+      ntRef.current += getSpeed();
+      for (let i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = waveWidth || 50;
+        ctx.strokeStyle = waveColors[i % waveColors.length];
+        for (let x = 0; x < w; x += 5) {
+          const y = noise(x / 800, 0.3 * i, ntRef.current) * 100;
+          ctx.lineTo(x, y + h * 0.5);
+        }
+        ctx.stroke();
+        ctx.closePath();
       }
-      ctx.stroke();
-      ctx.closePath();
-    }
-  };
+    },
+    [waveColors, waveWidth, speed]
+  );
 
   const render = useCallback(() => {
     const ctx = ctxRef.current;
@@ -83,7 +92,7 @@ export const WavyBackground = ({
 
     const id = requestAnimationFrame(render);
     setAnimationId(id);
-  }, [backgroundFill, waveOpacity, waveColors, waveWidth]);
+  }, [backgroundFill, waveOpacity, drawWave]);
 
   const init = useCallback(() => {
     const canvas = canvasRef.current;
